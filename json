@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Extended Unified Security Policy",
+  "type": "object",
+  "properties": {
+    "policyId": {
+      "type": "string",
+      "description": "A unique identifier for the policy."
+    },
+    "policyName": {
+      "type": "string",
+      "description": "The name of the policy."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of what the policy enforces."
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "type": "string",
+            "description": "Type of the resource (e.g., 'VM', 'S3', 'SQL Database')."
+          },
+          "resourceId": {
+            "type": "string",
+            "description": "The identifier of the resource."
+          }
+        },
+        "required": ["resourceType", "resourceId"]
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "The actions that are allowed or denied (e.g., 'read', 'write', 'execute')."
+      }
+    },
+    "effect": {
+      "type": "string",
+      "enum": ["allow", "deny"],
+      "description": "The effect of the policy (either 'allow' or 'deny')."
+    },
+    "conditions": {
+      "type": "object",
+      "description": "Conditions under which the policy is enforced, using key-value pairs."
+    }
+  },
+  "required": ["policyId", "policyName", "resources", "actions", "effect"]
+}
